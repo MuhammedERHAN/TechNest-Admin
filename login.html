@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login — TechNest</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+      const savedTheme = localStorage.getItem("technest-theme");
+      document.documentElement.classList.toggle(
+        "dark",
+        savedTheme ? savedTheme === "dark" : true,
+      );
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      @keyframes float-blob {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(70px, -50px, 0) scale(1.08);
+        }
+      }
+      .animate-float {
+        animation: float-blob 6s ease-in-out infinite;
+        will-change: transform;
+      }
+
+      @keyframes gradient-x {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+      .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 5s ease infinite;
+      }
+
+      @keyframes toast-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-toast-in {
+        animation: toast-in 0.3s ease-out both;
+      }
+    </style>
+
+    <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
+    </style>
+  </head>
+  <body
+    class="bg-white antialiased selection:bg-[#7C5CFC] selection:text-white dark:bg-[#0a0a0f] text-gray-900 dark:text-white font-['Inter'] min-h-[100dvh] relative overflow-hidden transition-colors duration-300"
+  >
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+      <div
+        class="pointer-events-none fixed -top-28 -left-28 w-96 h-96 bg-[#7C5CFC]/35 rounded-full blur-2xl animate-float motion-reduce:animate-none"
+      ></div>
+      <div
+        class="pointer-events-none fixed -bottom-28 -right-28 w-96 h-96 bg-[#34E4EA]/30 rounded-full blur-2xl animate-float motion-reduce:animate-none [animation-delay:2s]"
+      ></div>
+      <div
+        class="pointer-events-none fixed top-1/3 right-1/4 w-72 h-72 bg-[#FFB020]/10 rounded-full blur-2xl animate-float motion-reduce:animate-none [animation-delay:4s]"
+      ></div>
+    </div>
+
+    <button
+      id="theme-toggle"
+      aria-label="Toggle dark and light mode"
+      class="fixed transition-all duration-500 hover:shadow-lg hover:rotate-180 top-5 right-5 z-20 bg-[#7C5CFC]/15 border border-[#7C5CFC]/30 rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:scale-110 hover:bg-[#7C5CFC]/25 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]"
+    >
+      <svg
+        id="icon-sun"
+        class="w-5 h-5 text-[#FFB020] hidden"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        />
+      </svg>
+      <svg
+        id="icon-moon"
+        class="w-5 h-5 text-[#7C5CFC]"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z"
+        />
+      </svg>
+    </button>
+
+    <!-- Store pe wapis -->
+    <a
+      href="../index.html"
+      class="fixed top-8 left-7 z-20 text-sm text-[#6B6980] dark:text-[#9C9AB3] hover:text-[#7C5CFC] transition flex items-center gap-1.5"
+    >
+      <svg
+        class="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+      Back to store
+    </a>
+
+    <main
+      class="relative z-10 min-h-dvh flex items-center justify-center px-4 py-4"
+    >
+      <div
+        class="bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-3xl p-7 sm:p-10 w-full max-w-md shadow-2xl shadow-black/10 dark:shadow-black/40 transform-gpu transition-all duration-300 backdrop-saturate-150 ring-1 ring-white/10 hover:shadow-[0_25px_80px_rgba(124,92,252,.25)]"
+      >
+        <div class="flex items-center gap-2 justify-center mb-6">
+          <a
+            href="../index.html"
+            class="flex items-center gap-2.5 shrink-0 group focus:outline-none"
+          >
+            <div
+              class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#7C5CFC] via-[#5B75FF] to-[#34E4EA] p-0.5 shadow-lg shadow-[#7C5CFC]/30 group-hover:scale-105 transition-all duration-300"
+            >
+              <div
+                class="w-full h-full bg-[#0a0a0f] rounded-[14px] flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5 text-transparent bg-clip-text bg-gradient-to-r from-[#7C5CFC] to-[#34E4EA]"
+                  fill="none"
+                  stroke="url(#logo-grad)"
+                  stroke-width="2.2"
+                  viewBox="0 0 24 24"
+                >
+                  <defs>
+                    <linearGradient
+                      id="logo-grad"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stop-color="#7C5CFC" />
+                      <stop offset="100%" stop-color="#34E4EA" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <span
+              class="font-['Poppins'] font-extrabold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tight"
+            >
+              Tech<span
+                class="bg-gradient-to-r from-[#7C5CFC] via-[#5B75FF] to-[#34E4EA] bg-clip-text text-transparent"
+                >Nest</span
+              >
+            </span>
+          </a>
+        </div>
+
+        <span
+          class="block mx-auto w-fit px-3 py-1 rounded-full bg-[#34E4EA]/15 text-[#34E4EA] text-xs font-semibold tracking-wide mb-4"
+          >ADMIN PANEL</span
+        >
+
+        <h1
+          class="font-['Poppins'] text-2xl md:text-3xl leading-tight tracking-tight font-semibold text-center"
+        >
+          Admin Login
+        </h1>
+        <p class="text-[#6B6980] dark:text-[#9C9AB3] text-sm text-center mt-2">
+          Restricted access — authorized staff only
+        </p>
+
+        <form
+          id="admin-login-form"
+          autocomplete="on"
+          class="mt-8 space-y-4"
+          novalidate
+        >
+          <div>
+            <label for="email" class="block text-sm font-medium mb-1.5"
+              >Email</label
+            >
+            <input
+              inputmode="email"
+              type="email"
+              id="email"
+              spellcheck="false"
+              required
+              autocomplete="email"
+              placeholder="admin@technest.com"
+              aria-describedby="email-error"
+              class="w-full px-4 py-2.5 placeholder:tracking-wide rounded-xl bg-[#ECEBF5] dark:bg-white/8 border border-black/5 dark:border-white/10 text-gray-900 dark:text-white placeholder:text-[#6B6980] dark:placeholder:text-[#9C9AB3] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC] transition-all duration-200 focus:scale-[1.01]"
+            />
+            <p id="email-error" class="text-[#FB7185] text-xs mt-1 hidden"></p>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium mb-1.5"
+              >Password</label
+            >
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                spellcheck="false"
+                required
+                minlength="6"
+                autocomplete="current-password"
+                placeholder="••••••••"
+                aria-describedby="password-error"
+                class="w-full px-4 py-2.5 pr-11 placeholder:tracking-wide rounded-xl bg-[#ECEBF5] dark:bg-white/8 border border-black/5 dark:border-white/10 text-gray-900 dark:text-white placeholder:text-[#6B6980] dark:placeholder:text-[#9C9AB3] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC] transition-all duration-200 focus:scale-[1.01]"
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                aria-label="Show password"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B6980] dark:text-[#9C9AB3] hover:text-[#7C5CFC] transition"
+              >
+                <svg
+                  id="eye-open"
+                  class="w-5 h-5 hidden"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                <svg
+                  id="eye-closed"
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
+                  />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              </button>
+            </div>
+            <p
+              id="password-error"
+              class="text-[#FB7185] text-xs mt-1 hidden"
+            ></p>
+          </div>
+
+          <button
+            type="submit"
+            id="login-btn"
+            class="w-full tracking-wide select-none cursor-pointer py-3 active:scale-[.98] focus:ring-4 focus:ring-[#7C5CFC]/30 rounded-xl bg-gradient-to-r from-[#7C5CFC] via-[#34E4EA] to-[#7C5CFC] animate-gradient-x motion-reduce:animate-none text-white font-medium flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#7C5CFC]/40 hover:-translate-y-1 active:translate-y-0 transition-all disabled:opacity-70 disabled:pointer-events-none mt-2"
+          >
+            <svg
+              id="btn-spinner"
+              class="hidden w-5 h-5 animate-spin"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+              ></path>
+            </svg>
+            <span id="btn-text">Login</span>
+          </button>
+        </form>
+
+        <p class="text-center text-xs text-[#6B6980] dark:text-[#9C9AB3] mt-6">
+          Admin accounts are created internally and are not self-service.
+        </p>
+      </div>
+    </main>
+
+    <script type="module" src="./admin-login.js"></script>
+  </body>
+</html>
