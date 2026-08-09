@@ -77,7 +77,7 @@ mobileSidebar?.addEventListener("click", (e) => {
 async function handleLogout() {
   try {
     await supabase.auth.signOut();
-    window.location.href = "./login.html";
+    window.location.href = "./index.html";
   } catch (err) {
     console.error(err);
     toast("Failed to logout", "error");
