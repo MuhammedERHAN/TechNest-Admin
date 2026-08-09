@@ -17,7 +17,7 @@
       } = await window.supabase.auth.getSession();
 
       if (!session) {
-        window.location.replace("./login.html");
+        window.location.replace("./index.html");
       } else {
         const { data: profile } = await window.supabase
           .from("profiles")
@@ -27,7 +27,7 @@
 
         if (!profile || profile.role !== "admin") {
           await window.supabase.auth.signOut();
-          window.location.replace("./login.html");
+          window.location.replace("./index.html");
         } else {
           document.documentElement.style.visibility = "visible";
         }
